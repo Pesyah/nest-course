@@ -23,14 +23,8 @@ export class SeedService implements OnApplicationBootstrap {
 
   // Метод для выполнения сидов
   async runSeed() {
-    const categories = [
-      this.categoryBlogRepository.create({ id: 1, name: 'Technology' }),
-      this.categoryBlogRepository.create({ id: 2, name: 'Lifestyle' }),
-      this.categoryBlogRepository.create({ id: 3, name: 'Education' }),
-      this.categoryBlogRepository.create({ id: 4, name: 'Music' }),
-      this.categoryBlogRepository.create({ id: 5, name: 'Scientific' }),
-      this.categoryBlogRepository.create({ id: 6, name: 'Entertainment' }),
-    ];
+    await this.categorySeed()
+
     const roles = [
       this.roleRepository.create({ id: 1, name: 'Admin' }),
       this.roleRepository.create({ id: 2, name: 'User' }),
@@ -40,7 +34,19 @@ export class SeedService implements OnApplicationBootstrap {
       this.statusRepository.create({ id: 2, name: 'Accepted' }),
       this.statusRepository.create({ id: 3, name: 'Denied' }),
     ];
-    await this.categoryBlogRepository.save(categories);
+    
     await this.roleRepository.save(roles);
+  }
+
+  async categorySeed() {
+    const categories = [
+      this.categoryBlogRepository.create({ id: 1, name: 'Technology' }),
+      this.categoryBlogRepository.create({ id: 2, name: 'Lifestyle' }),
+      this.categoryBlogRepository.create({ id: 3, name: 'Education' }),
+      this.categoryBlogRepository.create({ id: 4, name: 'Music' }),
+      this.categoryBlogRepository.create({ id: 5, name: 'Scientific' }),
+      this.categoryBlogRepository.create({ id: 6, name: 'Entertainment' }),
+    ];
+    await this.categoryBlogRepository.save(categories);
   }
 }

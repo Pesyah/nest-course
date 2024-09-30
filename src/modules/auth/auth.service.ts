@@ -1,13 +1,9 @@
 import {
   BadRequestException,
-  ConflictException,
   Injectable,
-  UnauthorizedException,
 } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
-import { LogInAuthenticationDto } from './dto/LogIn-authentication.dto';
 import { JwtService } from '@nestjs/jwt';
-import { use } from 'passport';
 import { CreateAuthenticationDto } from './dto/create-authentication.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Profile } from 'src/db/entities/authentication.entity';
@@ -34,7 +30,7 @@ export class AuthService {
       });
       const newProfile = this.ProfileRepository.create({
         username: username,
-        password: password,
+        password: password, // TODO хешировать пароль надобно
         roleID: userRole,
       });
       const existingProfile = await this.ProfileRepository.findOne({
